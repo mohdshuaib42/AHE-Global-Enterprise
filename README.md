@@ -6,11 +6,13 @@ A responsive Flask website for AHE Global's solar products, installation support
 
 Requirements: Docker Engine with the Docker Compose plugin.
 
-1. Create a local environment file and set unique values for `SECRET_KEY`, `DB_PASSWORD`, and `MYSQL_ROOT_PASSWORD`. Compose will stop with a clear error until both database passwords are filled in:
+1. Create a local environment file and replace the placeholders with unique values for `SECRET_KEY`, `DB_PASSWORD`, and `MYSQL_ROOT_PASSWORD`. Use different passwords for the application user and MySQL root. Compose will stop with a clear error until the database passwords are set:
 
    ```bash
    cp .env.example .env
    ```
+
+   Generate secure values with `openssl rand -hex 32` (run it separately for each secret), then paste them into `.env`. Do not commit `.env`; it is excluded by `.gitignore`.
 
 2. Build and start the app, MySQL, and Nginx:
 
