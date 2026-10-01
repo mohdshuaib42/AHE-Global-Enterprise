@@ -1,22 +1,4 @@
 (() => {
-  const body = document.body;
-  const themeButton = document.querySelector('.theme-toggle');
-  const themeIcon = document.querySelector('.theme-icon');
-  const savedTheme = localStorage.getItem('ahe-theme-v3');
-  const setTheme = (dark) => {
-    body.classList.toggle('dark', dark);
-    themeIcon.textContent = dark ? '☾' : '☼';
-    themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#050b12' : '#f2f6fa';
-  };
-  // AHE Global Enterprise's midnight theme is the default; the visitor's switch choice is remembered.
-  setTheme(savedTheme ? savedTheme === 'dark' : true);
-  themeButton.addEventListener('click', () => {
-    const dark = !body.classList.contains('dark');
-    setTheme(dark);
-    localStorage.setItem('ahe-theme-v3', dark ? 'dark' : 'light');
-  });
-
   const menuButton = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.main-nav');
   const closeMenu = () => {
