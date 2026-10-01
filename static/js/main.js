@@ -19,15 +19,42 @@
 
   const menuButton = document.querySelector('.menu-toggle');
   const menu = document.querySelector('.main-nav');
+  const closeMenu = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation');
+    menu.classList.remove('open');
+  };
   menuButton.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') !== 'true';
     menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     menu.classList.toggle('open', open);
   });
-  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-    menuButton.setAttribute('aria-expanded', 'false');
-    menu.classList.remove('open');
-  }));
+  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
+
+  const header = document.querySelector('.site-header');
+  const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 18);
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  const hero = document.querySelector('.hero');
+  if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    hero.addEventListener('pointermove', (event) => {
+      const bounds = hero.getBoundingClientRect();
+      hero.style.setProperty('--spot-x', `${event.clientX - bounds.left}px`);
+      hero.style.setProperty('--spot-y', `${event.clientY - bounds.top}px`);
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      hero.style.setProperty('--spot-x', '72%');
+      hero.style.setProperty('--spot-y', '40%');
+    }, { passive: true });
+  }
 
   const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
