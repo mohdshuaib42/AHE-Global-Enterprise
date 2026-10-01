@@ -1,6 +1,6 @@
-# AHE Global
+# AHE Global Enterprise
 
-A responsive Flask website for AHE Global's solar products, installation support, and international container trade.
+A responsive Flask website for AHE Global Enterprise's solar products, installation support, and international container trade.
 
 ## Run the full stack with Docker Compose
 

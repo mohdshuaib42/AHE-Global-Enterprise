@@ -9,7 +9,7 @@
     themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
     document.querySelector('meta[name="theme-color"]').content = dark ? '#050b12' : '#f2f6fa';
   };
-  // AHE's midnight theme is the default; the visitor's switch choice is remembered.
+  // AHE Global Enterprise's midnight theme is the default; the visitor's switch choice is remembered.
   setTheme(savedTheme ? savedTheme === 'dark' : true);
   themeButton.addEventListener('click', () => {
     const dark = !body.classList.contains('dark');
